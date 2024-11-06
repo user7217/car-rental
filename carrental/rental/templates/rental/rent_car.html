@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Car - Car Rental</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="rent-car-container">
+        <h2>Rent {{ car.make }} {{ car.model }}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div>
+                <input type="text" name="address" placeholder="Your Address" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

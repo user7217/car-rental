@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <style>
+            /* Set a background image */
+            body {
+                background-image: url("{% static 'rental/images/login_background.jpg' %}");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                color: #333;
+            }
+            .login-container {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 60px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 300px;
+                text-align: center;
+            }
+            .form-group {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                flex-basis: 40%;
+                text-align: left;
+                margin-right: 10px;
+            }
+            .form-group input[type="text"],
+            .form-group input[type="password"] {
+                flex-basis: 55%;
+                padding: 8px;
+                font-size: 14px;
+                box-sizing: border-box;
+            }
+            .password-container {
+                position: relative;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .password-input {
+                width: 100%;
+                padding: 8px;
+                padding-right: 30px; /* Space for the toggle icon */
+                box-sizing: border-box;
+                font-size: 14px;
+            }
+            .toggle-password {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 14px;
+                color: #555;
+            }
+            input[type="submit"] {
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+            .error-message {
+                color: red;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+<body>
+    <div class="login-container">
+        <h2>Car Rental Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <input type="radio" id="login_as_user" name="login_option" value="login_as_user" checked>
+                <label for="login_as_user">Login as User</label>
+            </div>
+            <div>
+                <input type="radio" id="signup" name="login_option" value="signup">
+                <label for="signup">Sign Up</label>
+            </div>
+            <div>
+                <input type="radio" id="login_as_admin" name="login_option" value="login_as_admin">
+                <label for="login_as_admin">Login as Admin</label>
+            </div>
+            <div>
+                <input type="text" name="username" placeholder="Username or Email" required>
+            </div>
+            <label for="password">Password:</label>
+                <div class="password-container">
+                    <input type="password" name="password" class="password-input" id="password">
+                    <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+                </div>
+            <button type="submit">Login</button>
+        </form>
+        <!-- Display error message if present -->
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            const toggleButton = document.querySelector(".toggle-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.textContent = "👁️‍🗨️"; // Change icon to indicate hiding
+            } else {
+                passwordField.type = "password";
+                toggleButton.textContent = "👁️"; // Change icon to indicate showing
+            }
+        }
+    </script>
+</body>
+</html>

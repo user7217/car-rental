@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Car Rental</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Admin Dashboard</h2>
+        <a href="{% url 'add_car' %}" class="add-car-button">Add New Car</a>
+        <div class="cars-list">
+            {% for car in cars %}
+                <div class="car-item">
+                    <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
+                    <h3>{{ car.make }} {{ car.model }}</h3>
+                    <p>Price per day: ₹{{ car.price_per_day }}</p>
+                    <a href="#" class="remove-button">Remove Car</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

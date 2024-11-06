@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car - Car Rental</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="add-car-container">
+        <h2>Add New Car</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <input type="text" name="make" placeholder="Make" required>
+            </div>
+            <div>
+                <input type="text" name="model" placeholder="Model" required>
+            </div>
+            <div>
+                <input type="number" name="price_per_day" placeholder="Price per day" required>
+            </div>
+            <div>
+                <input type="file" name="image" accept="image/*" required>
+            </div>
+            <button type="submit">Add Car</button>
+        </form>
+    </div>
+</body>
+</html>
